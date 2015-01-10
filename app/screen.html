@@ -41,7 +41,8 @@
       <div class="small-centered small-12 columns text-center">
 
         <div id='video-player' class='abp'>
-          <video src="videos/cat.mov" id="video" loop></video>
+          <video src="videos/cat.mov" id="video" loop class='hide'></video>
+          <canvas id="canvas" width="640" height="480"></canvas>
           <div id='my-comment-stage' class='container'></div>
         </div>
         <button ng-click='playOrPause()'/>play/pause</button>

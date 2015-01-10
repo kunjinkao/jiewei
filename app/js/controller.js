@@ -44,7 +44,7 @@ jieweiApp.controller('VideoController', function($scope, $interval) {
     var hue = huesToChoose[userId%huesToChoose.length];
     var mode = _.random(1, 6);
     var size = _.random(60, 120);
-    var color = parseInt(randomColor({hue:hue}).split('#')[1], 16);    
+    var color = parseInt(randomColor({hue:hue}).split('#')[1], 16);
     var obj = genDanmakuObj(word, mode, size, color);
     cm.send(obj);
   }
@@ -58,7 +58,7 @@ jieweiApp.controller('VideoController', function($scope, $interval) {
     if (err) return alert(err)
 
     rhizome.send('/sys/subscribe', ['/danmaku']);
-
+    rhizome.send('/sys/subscribe', ['/effect']);
   })
 
   rhizome.on('message', function(address, args) {
@@ -67,10 +67,26 @@ jieweiApp.controller('VideoController', function($scope, $interval) {
     } else if (address === '/danmaku') {
       // if(parseInt(args[1]) != rhizome.userId ) return;
       sendDanmaku(args[0], args[1]);
-    } else if (address === '/update/all/sample') {
-      // updateSample(args);
+    } else if (address === '/effect') {
+      updateEffect(args);
     }
   })
 
+  var updateEffect = function(args) {
+      // 0 loudness, 1 centroid for now
+      hue.hue = args[0];
+      hue.saturation = args[1];
+  }
 
+  //  seriously begin
+  var seriously, colorbars, target, vignette;
+  seriously = new Seriously();
+  colorbars = seriously.source('#video');
+  target = seriously.target('#canvas');
+  hue = seriously.effect('hue-saturation');
+
+  hue.source = colorbars;
+  target.source = hue;
+  seriously.go();
+  // seriously end
 });
