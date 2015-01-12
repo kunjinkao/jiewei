@@ -2,3 +2,4 @@ audio/
 videos/
 text/
 bower_components/
+.DS_store

@@ -3,6 +3,11 @@ $(function() {
   var $submitBtn = $('#submit-btn');
   var $userInput = $('#user-input-text');
 
+  $('body').bind('copy paste', function(e){
+    e.preventDefault();
+    return false;
+  })
+
   rhizome.on('connected', function() {
     console.log('connected');
   })

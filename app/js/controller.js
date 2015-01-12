@@ -2,8 +2,33 @@ var jieweiApp = angular.module('jiewei', []);
 
 
 jieweiApp.controller('VideoController', function($scope, $interval) {
+  var videos = ['videos/zhugeliang.mp4', 'videos/tangmu.mp4', 'videos/zuqu.mp4', 'videos/zuqu2.mp4','videos/yanyi.mp4'];
   var huesToChoose = ['yellow', 'green', 'blue', 'red', 'orange'];
-  var video = document.getElementById('video')
+  var authors = {
+    'videos/zhugeliang.mp4': "懒天白",
+    'videos/tangmu.mp4': "W芙兰朵露W",
+    'videos/zuqu.mp4': '★开心熊猫★',
+    'videos/zuqu2.mp4': '主教',
+    'videos/yanyi.mp4': 'LIKEfeather'
+  }
+
+  video = document.getElementById('video');
+
+  var updateVideo = function(play){
+    $scope.video = _.sample(videos);
+    $scope.author = authors[$scope.video];
+
+    if(play) {
+      video.play();
+    }
+  }
+
+  updateVideo(false);
+
+
+  video.addEventListener('ended', function(){
+    updateVideo(true);
+  });
 
   $(document).foundation();
 
@@ -74,19 +99,31 @@ jieweiApp.controller('VideoController', function($scope, $interval) {
 
   var updateEffect = function(args) {
       // 0 loudness, 1 centroid for now
-      hue.hue = args[0];
-      hue.saturation = args[1];
+      hue.hue = args[0]*2 - 1;
+      hue.saturation = args[1] * 2 - 1;
+      tvglitch.distortion  = args[2];
+      tvglitch.scanlines  = args[3];
+      tvglitch.lineSync  = args[4];
+
   }
 
+
   //  seriously begin
-  var seriously, colorbars, target, vignette;
+  var seriously, colorbars, target, tvglitch, noise;
   seriously = new Seriously();
   colorbars = seriously.source('#video');
   target = seriously.target('#canvas');
   hue = seriously.effect('hue-saturation');
+  tvglitch = seriously.effect('tvglitch');
 
+  hue.hue = 0; // -1 - 1
+  hue.saturation = 0; // -1 - 1
+  tvglitch.distortion = 0; // 0 - 1
+  tvglitch.scanlines = 0;  // 0 - 1
+  tvglitch.lineSync = 0;  // 0 - 1
   hue.source = colorbars;
-  target.source = hue;
+  tvglitch.source = hue;
+  target.source = tvglitch;
   seriously.go();
   // seriously end
 });
