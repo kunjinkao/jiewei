@@ -2,18 +2,14 @@ var jieweiApp = angular.module('jiewei', ['monospaced.qrcode']);
 
 
 jieweiApp.controller('VideoController', function($scope, $interval) {
-  // var videos = ['videos/zhugeliang.mp4', 'videos/tangmu.mp4', 'videos/zuqu.mp4', 'videos/zuqu2.mp4','videos/yanyi.mp4'];
+  var videos = ['videos/zhugeliang.mp4', 'videos/tangmu.mp4', 'videos/zuqu.mp4', 'videos/zuqu2.mp4','videos/yanyi.mp4'];
   var huesToChoose = ['yellow', 'green', 'blue', 'red', 'orange'];
-  // var authors = {
-  //   'videos/zhugeliang.mp4': "懒天白",
-  //   'videos/tangmu.mp4': "W芙兰朵露W",
-  //   'videos/zuqu.mp4': '★开心熊猫★',
-  //   'videos/zuqu2.mp4': '主教',
-  //   'videos/yanyi.mp4': 'LIKEfeather'
-  // }
-  var videos = ['videos/grunt01.mp4'];
   var authors = {
-    'videos/grunt-01.mp4': 'perry'
+    'videos/zhugeliang.mp4': "懒天白",
+    'videos/tangmu.mp4': "W芙兰朵露W",
+    'videos/zuqu.mp4': '★开心熊猫★',
+    'videos/zuqu2.mp4': '主教',
+    'videos/yanyi.mp4': 'LIKEfeather'
   }
 
   video = document.getElementById('video');
