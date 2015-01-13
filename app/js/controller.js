@@ -1,15 +1,19 @@
-var jieweiApp = angular.module('jiewei', []);
+var jieweiApp = angular.module('jiewei', ['monospaced.qrcode']);
 
 
 jieweiApp.controller('VideoController', function($scope, $interval) {
-  var videos = ['videos/zhugeliang.mp4', 'videos/tangmu.mp4', 'videos/zuqu.mp4', 'videos/zuqu2.mp4','videos/yanyi.mp4'];
+  // var videos = ['videos/zhugeliang.mp4', 'videos/tangmu.mp4', 'videos/zuqu.mp4', 'videos/zuqu2.mp4','videos/yanyi.mp4'];
   var huesToChoose = ['yellow', 'green', 'blue', 'red', 'orange'];
+  // var authors = {
+  //   'videos/zhugeliang.mp4': "懒天白",
+  //   'videos/tangmu.mp4': "W芙兰朵露W",
+  //   'videos/zuqu.mp4': '★开心熊猫★',
+  //   'videos/zuqu2.mp4': '主教',
+  //   'videos/yanyi.mp4': 'LIKEfeather'
+  // }
+  var videos = ['videos/grunt01.mp4'];
   var authors = {
-    'videos/zhugeliang.mp4': "懒天白",
-    'videos/tangmu.mp4': "W芙兰朵露W",
-    'videos/zuqu.mp4': '★开心熊猫★',
-    'videos/zuqu2.mp4': '主教',
-    'videos/yanyi.mp4': 'LIKEfeather'
+    'videos/grunt-01.mp4': 'perry'
   }
 
   video = document.getElementById('video');
@@ -126,4 +130,35 @@ jieweiApp.controller('VideoController', function($scope, $interval) {
   target.source = tvglitch;
   seriously.go();
   // seriously end
+
+  // full screen canvas
+  function fullscreen(){
+    var elem = document.getElementById('video-section');
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+  }
+
+  $scope.fullScreen = function() {
+    $scope.isFullScreen = true;
+    fullscreen();
+  }
+
+  var win = $(window);
+
+  function resize() {
+    $("#canvas") // best to save a reference of this
+      .width(win.width())
+      .height(win.height() - 110);
+  }
+
+  win.resize(resize).resize();
+
+  $scope.href = location.protocol + '//' + location.host;
 });

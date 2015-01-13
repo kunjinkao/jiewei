@@ -4,17 +4,44 @@
   -webkit-user-select: none;
 }*/
 
-#video {
-  width: 80%;
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-#user-input {
-  margin-top: 40px
+.site-content {
+  flex: 1;
 }
 
-/*#video-player {
-  width: 800px;
-  height: 400px;
-  background-color: black;
-  border: 1px solid red;
-}*/
+  .video_section {
+    text-align: center;
+  }
+
+  .container_flex {
+    display: flex;
+    min-height: 90vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+    .item_flex {
+      text-align: center;
+      min-width: 40vw;
+    }
+
+  #user-input {
+  }
+
+  /*#video-player {
+    width: 800px;
+    height: 400px;
+    background-color: black;
+    border: 1px solid red;
+  }*/
+
+@media only screen and (max-width: 40em) {
+  html {
+    font-size: 12px;
+  }
+}

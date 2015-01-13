@@ -17,50 +17,28 @@
   <script src="bower_components/lodash/dist/lodash.js"></script>
   <script src="bower_components/randomColor/randomColor.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
-  <script src="js/seriously/seriously.js"></script>
-  <script src="js/seriously/effects/seriously.hue-saturation.js"></script>
-  <script src="js/seriously/effects/seriously.tvglitch.js"></script>
-  <script src="js/seriously/effects/seriously.noise.js"></script>
+  <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
+  <script src="bower_components/angular-qrcode/qrcode.js"></script>
+  <script src="js/lib/Seriously.js/seriously.js"></script>
+  <script src="js/lib/Seriously.js/effects/seriously.hue-saturation.js"></script>
+  <script src="js/lib/Seriously.js/effects/seriously.tvglitch.js"></script>
+  <script src="js/lib/Seriously.js/effects/seriously.noise.js"></script>
   <script src="js/controller.js"></script>
 </head>
 
-<body  ontouchstart="">
-  <nav class="tab-bar">
-    <section class="middle tab-bar-section">Zoomin's Night</section>
-  </nav>
+<body ontouchstart="">
 
-
-  <section id="tips">
-    <div class="row">
-      <div class="small-centered small-8 large-6 columns">
-        <h1 class="text-center"></h1>
-      </div>
+  <section id="video-section" ng-controller="VideoController" class="video_section">
+    <div id='video-player' class='abp'>
+      <video muted ng-src="{{video}}" id="video" class='hide' type="video/mp4"></video>
+      <canvas id="canvas"></canvas>
+      <div id='my-comment-stage' class='container'></div>
     </div>
+    <p>by {{author}}</p>
+    <button ng-click='playOrPause()'/>play/pause</button>
+    <button ng-click='fullScreen()' ng-hide="isFullScreen"/>full screen</button>
   </section>
 
-  <section id="video-section" ng-controller="VideoController">
-    <div class="row">
-      <div class="small-centered small-12 columns text-center">
-
-        <div id='video-player' class='abp'>
-          <video muted ng-src="{{video}}" id="video" class='hide'></video>
-          <canvas id="canvas" width="600" height="480"></canvas>
-          <div id='my-comment-stage' class='container'></div>
-        </div>
-        <p>by {{author}}</p>
-        <button ng-click='playOrPause()'/>play/pause</button>
-      </div>
-    </div>
-  </section>
-
-
-  <footer>
-    <div class="row">
-      <div class="small-centered small-12 columns text-right">
-        <p class="text-right">kiddeng, DingChenChen, kunjinkao</p>
-      </div>
-    </div>
-  </footer>
 </body>
 
 </html>
